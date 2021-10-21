@@ -25,3 +25,29 @@ void MainWindow::on_pushButton_clicked()
     ui->labelVectorLength->setText(labelVectorLength);
 }
 
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QVector<double> x(101), y(101);
+    for(int i=0; i<101; ++i) {
+        x[i] = i/50.0-1;
+        y[i] = x[i]*x[i];
+    }
+    ui->plot->addGraph();
+    ui->plot->graph(0)->setData(x,y);
+    ui->plot->xAxis->setLabel("x");
+    ui->plot->yAxis->setLabel("y");
+    ui->plot->xAxis->setRange(-1,1);
+    ui->plot->yAxis->setRange(0,1);
+    ui->plot->replot();
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QString filename = "plot.png";
+    QString outputDir = "C:/Users/Mirek/Desktop/pwr-calc";
+    ui->plot->savePng(outputDir+"/"+filename, 500, 400);
+}
+
