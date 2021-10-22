@@ -22,6 +22,8 @@ private slots:
 
     void savePlotBtn();
 
+    void on_fxCalculateBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
