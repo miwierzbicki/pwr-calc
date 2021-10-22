@@ -16,11 +16,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void calculateVectorBtn();
 
-    void on_pushButton_2_clicked();
+    void generatePlotBtn();
 
-    void on_pushButton_3_clicked();
+    void savePlotBtn();
 
 private:
     Ui::MainWindow *ui;
