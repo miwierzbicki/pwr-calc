@@ -16,13 +16,13 @@ public:
     ~MainWindow();
 
 private slots:
-    void calculateVectorBtn();
-
-    void generatePlotBtn();
-
-    void savePlotBtn();
-
     void on_fxCalculateBtn_clicked();
+
+    void on_calculateVectorBtn_clicked();
+
+    void on_generatePlotBtn_clicked();
+
+    void on_savePlotBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
