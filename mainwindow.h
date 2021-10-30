@@ -24,6 +24,16 @@ private slots:
 
     void on_savePlotBtn_clicked();
 
+    void on_sinPlotBtn_clicked();
+
+    void on_cosPlotBtn_clicked();
+
+    void on_clrPlotBtn_clicked();
+
+    void on_tanPlotBtn_clicked();
+
+
+
 private:
     Ui::MainWindow *ui;
 };

@@ -6,9 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->plot->addGraph();
-    ui->plot->xAxis->setLabel("x"); //generowanie osi x,y w konstruktorze
-    ui->plot->yAxis->setLabel("y");
 }
 
 MainWindow::~MainWindow()
@@ -57,19 +54,22 @@ void MainWindow::on_calculateVectorBtn_clicked()
 
 void MainWindow::on_generatePlotBtn_clicked()
 {
+
+    ui->plot->replot(); //reploting
     QVector<double> x(101), y(101);
     for(int i=0; i<101; ++i) {
         x[i] = i/50.0-1;
-        y[i] = x[i]*x[i];
+        y[i] = 2*x[i]*x[i]-4*x[i];
     }
+
+
     ui->plot->addGraph();
+    ui->plot->xAxis->setLabel("x");
+    ui->plot->yAxis->setLabel("y");
     ui->plot->graph(0)->setData(x,y); //z dokumentacji, testowy wykres
-    double axisRange = ui->axisSpinBox->value();
-    ui->plot->xAxis->setRange(-1,1);
-    ui->plot->yAxis->setRange(0,axisRange);
+    ui->plot->graph(0)->rescaleAxes();
     ui->plot->replot();
 }
-
 
 void MainWindow::on_savePlotBtn_clicked()
 {
@@ -77,4 +77,71 @@ void MainWindow::on_savePlotBtn_clicked()
     QString outputDir = "C:/Users/Mirek/Desktop/pwr-calc"; //zmienic na dialog z wyborem miejsca zapisu
     ui->plot->savePng(outputDir+"/"+filename, 500, 400);
 }
+
+void MainWindow::on_sinPlotBtn_clicked()
+{
+
+    ui->trigPlot->replot(); //reploting
+    QVector<double> x(251), y(251);
+    for(int i=0; i<251; ++i) {
+        x[i] = i;
+        y[i] = qSin(i/10.0);
+    }
+    ui->trigPlot->addGraph();
+    ui->trigPlot->xAxis->setLabel("x");
+    ui->trigPlot->yAxis->setLabel("y");
+    ui->trigPlot->graph(0)->setData(x,y);
+    ui->trigPlot->graph(0)->rescaleAxes();
+    ui->trigPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    ui->trigPlot->replot();
+}
+
+
+void MainWindow::on_cosPlotBtn_clicked()
+{
+   //clearing graph before plotting
+    ui->trigPlot->replot(); //reploting
+    QVector<double> x(101), y(101);
+    for(int i=0; i<101; ++i) {
+        x[i] = i;
+        y[i] = qCos(i/10.0);
+    }
+    ui->trigPlot->addGraph();
+    ui->trigPlot->xAxis->setLabel("pi");
+    ui->trigPlot->yAxis->setLabel("value");
+    ui->trigPlot->graph(0)->setData(x,y);
+    ui->trigPlot->graph(0)->rescaleAxes();
+    ui->trigPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    ui->trigPlot->replot();
+}
+
+
+void MainWindow::on_clrPlotBtn_clicked()
+{
+    if((ui->trigPlot->graph(0))!=0) { //graph() zwraca 0 jezeli nie ma o zadanym indeksie, walidacja bledow
+        ui->trigPlot->graph(0)->data()->clear();
+        ui->trigPlot->replot();
+    }
+
+}
+
+
+void MainWindow::on_tanPlotBtn_clicked()
+{
+    ui->trigPlot->graph(0)->data()->clear(); //clearing graph before plotting
+    ui->trigPlot->replot(); //reploting
+    QVector<double> x(101), y(101);
+    for(int i=0; i<101; ++i) {
+        x[i] = i;
+        y[i] = qTan(i/10.0);
+    }
+    ui->trigPlot->addGraph();
+    ui->trigPlot->xAxis->setLabel("pi");
+    ui->trigPlot->yAxis->setLabel("value");
+    ui->trigPlot->graph(0)->setData(x,y);
+    ui->trigPlot->graph(0)->rescaleAxes();
+    ui->trigPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    ui->trigPlot->replot();
+}
+
 
