@@ -233,4 +233,17 @@ void MainWindow::on_arctanSpinBox_valueChanged(double arg1)
     ui->arctanValue->setValue(value);
 }
 
+void MainWindow::on_circleSpinBox_valueChanged(double arg1)
+{
+    if(ui->doublePiCheckbox->isChecked()) {
+        double value = ui->circleSpinBox->value()*ui->circleSpinBox->value()*3.14159265359;
+        QString qvalue = QString::number(value, 'f', 7);
+        ui->circleValue->setText(qvalue);
+    }
+    else {
+        double value = ui->circleSpinBox->value()*ui->circleSpinBox->value()*3.14;
+        QString qvalue = QString::number(value, 'f', 3);
+        ui->circleValue->setText(qvalue);
+    }
+}
 

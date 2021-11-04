@@ -175,6 +175,11 @@
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="1" column="2">
          <widget class="QPushButton" name="savePlotBtn">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Zapisz jako .png</string>
           </property>
@@ -182,6 +187,11 @@
         </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="generatePlotBtn">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Wygeneruj wykres f(x)</string>
           </property>
@@ -189,6 +199,11 @@
         </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="clrFxPlotBtn">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Wyczyść wykres</string>
           </property>
@@ -224,6 +239,11 @@
               <height>50</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Sin</string>
             </property>
@@ -236,6 +256,11 @@
               <width>0</width>
               <height>50</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
             </property>
             <property name="text">
              <string>Cos</string>
@@ -250,6 +275,11 @@
               <height>50</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Tan</string>
             </property>
@@ -262,6 +292,11 @@
               <width>0</width>
               <height>50</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
             </property>
             <property name="text">
              <string>Wyczyść</string>
@@ -320,7 +355,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="frame">
@@ -373,7 +408,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="buttonSymbols">
@@ -420,7 +455,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="buttonSymbols">
@@ -467,7 +502,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="buttonSymbols">
@@ -966,17 +1001,29 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_9">
            <item row="1" column="0">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
+            <widget class="QDoubleSpinBox" name="circleSpinBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QCheckBox" name="checkBox">
+            <widget class="QCheckBox" name="doublePiCheckbox">
              <property name="text">
               <string>Większa prezycja Pi</string>
              </property>
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="circleValue">
              <property name="text">
               <string/>
              </property>
@@ -1024,20 +1071,44 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="rectangleValue">
              <property name="text">
               <string/>
              </property>
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
+            <widget class="QDoubleSpinBox" name="aRectangleSpinBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
+            <widget class="QDoubleSpinBox" name="bRectangleSpinBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QCheckBox" name="checkBox_2">
+            <widget class="QCheckBox" name="squareCheckbox">
              <property name="text">
               <string>Kwadrat</string>
              </property>
@@ -1053,16 +1124,52 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
            <item row="2" column="0">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+            <widget class="QDoubleSpinBox" name="bTriangleSpinBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+            <widget class="QDoubleSpinBox" name="aTriangleSpinBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+            <widget class="QDoubleSpinBox" name="cTriangleSpinBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="triangleValue">
              <property name="text">
               <string/>
              </property>

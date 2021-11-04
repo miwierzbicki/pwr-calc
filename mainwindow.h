@@ -52,6 +52,8 @@ private slots:
 
     void on_arcsinSpinBox_valueChanged(double arg1);
 
+    void on_circleSpinBox_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
 };
