@@ -1,11 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtMath>
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->statusbar->showMessage("v 0.22");
 }
 
 MainWindow::~MainWindow()
@@ -18,25 +21,35 @@ void MainWindow::on_fxCalculateBtn_clicked()
     double a = ui->aFxSpinBox->value();
     double b = ui->bFxSpinBox->value();
     double c = ui->cFxSpinBox->value();
-    double delta = (qPow(b,2) - (4*a*c));
-    if(delta>0) {
-        double x1 = (((-1)*b-qSqrt(delta))/(2*a));
-        double x2 = (((-1)*b+qSqrt(delta))/(2*a));
-        QString x1label = QString::number(x1, 'f', 3);
-        QString x2label = QString::number(x2, 'f', 3);
-        ui->fxX1Label->setText(x1label);
-        ui->fxX2Label->setText(x2label);
-    }
-    else if(delta==0) {
-        double x0 = (((-1)*b)/(2*a));
-        QString x0label = QString::number(x0, 'f', 3);
-        ui->fxX1Label->setText(x0label);
+    if(a==0) {
+        ui->fxX1Label->setText("Niepoprawna fx");
         ui->fxX2Label->setText(NULL);
     }
     else {
-        ui->fxX1Label->setText("Brak miejsc zerowych f(x)");
-        ui->fxX2Label->setText(NULL);
+        double delta = (qPow(b,2) - (4*a*c));
+        if(delta>0) {
+            double x1 = (((-1)*b-qSqrt(delta))/(2*a));
+            double x2 = (((-1)*b+qSqrt(delta))/(2*a));
+            QString x1label = QString::number(x1, 'f', 3);
+            x1label = "x1 = "+x1label;
+            QString x2label = QString::number(x2, 'f', 3);
+            x2label = "x2 = "+x2label;
+            ui->fxX1Label->setText(x1label);
+            ui->fxX2Label->setText(x2label);
+        }
+        else if(delta==0) {
+            double x0 = (((-1)*b)/(2*a));
+            QString x0label = QString::number(x0, 'f', 3);
+            x0label = "x0 = "+x0label;
+            ui->fxX1Label->setText(x0label);
+            ui->fxX2Label->setText(NULL);
+        }
+        else {
+            ui->fxX1Label->setText("Brak miejsc zerowych f(x)");
+            ui->fxX2Label->setText(NULL);
+        }
     }
+
 }
 
 
@@ -55,11 +68,25 @@ void MainWindow::on_calculateVectorBtn_clicked()
 void MainWindow::on_generatePlotBtn_clicked()
 {
 
-    ui->plot->replot(); //reploting
+    //debug btns
+//    double dbgA=ui->debugA->value();
+//    double dbgB=ui->debugB->value();
+//    double dbgC=ui->debugC->value();
+//    double dbgXAxisFrom=ui->debugXAxisFrom->value();
+//    double dbgXAxisTo=ui->debugXAxisTo->value();
+//    double dbgYAxisFrom=ui->debugYAxisFrom->value();
+//    double dbgYAxisTo=ui->debugYAxisTo->value();
+//    double dbgDivider=ui->debugDivider->value();
+    //end of debug btns
+    //debbuing plot
+    double a = ui->aFxSpinBox->value();
+    double b = ui->bFxSpinBox->value();
+    double c = ui->cFxSpinBox->value();
+    ui->plot->replot();
     QVector<double> x(101), y(101);
     for(int i=0; i<101; ++i) {
         x[i] = i/50.0-1;
-        y[i] = 2*x[i]*x[i]-4*x[i];
+        y[i] = a*(x[i]*x[i])+b*x[i]+c;
     }
 
 
@@ -67,15 +94,17 @@ void MainWindow::on_generatePlotBtn_clicked()
     ui->plot->xAxis->setLabel("x");
     ui->plot->yAxis->setLabel("y");
     ui->plot->graph(0)->setData(x,y); //z dokumentacji, testowy wykres
-    ui->plot->graph(0)->rescaleAxes();
+    //ui->plot->xAxis->setRange(dbgXAxisFrom,dbgXAxisTo);
+    ui->plot->graph(0)->rescaleAxes(true);
+    //ui->plot->graph(0)->rescaleAxes();
+    ui->plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     ui->plot->replot();
 }
 
 void MainWindow::on_savePlotBtn_clicked()
 {
-    QString filename = "plot.png"; //dodac moze wzor do nazwy pliku idk
-    QString outputDir = "C:/Users/Mirek/Desktop/pwr-calc"; //zmienic na dialog z wyborem miejsca zapisu
-    ui->plot->savePng(outputDir+"/"+filename, 500, 400);
+    QString outputDir = QFileDialog::getSaveFileName(this, tr("Zapisz plik"),"",tr("*.png"));
+    ui->plot->savePng(outputDir, 500, 400);
 }
 
 void MainWindow::on_sinPlotBtn_clicked()
@@ -115,7 +144,6 @@ void MainWindow::on_cosPlotBtn_clicked()
     ui->trigPlot->replot();
 }
 
-
 void MainWindow::on_clrPlotBtn_clicked()
 {
     if((ui->trigPlot->graph(0))!=0) { //graph() zwraca 0 jezeli nie ma o zadanym indeksie, walidacja bledow
@@ -124,12 +152,10 @@ void MainWindow::on_clrPlotBtn_clicked()
     }
 
 }
-
-
 void MainWindow::on_tanPlotBtn_clicked()
 {
-    ui->trigPlot->graph(0)->data()->clear(); //clearing graph before plotting
-    ui->trigPlot->replot(); //reploting
+    ui->trigPlot->graph(0)->data()->clear();
+    ui->trigPlot->replot();
     QVector<double> x(101), y(101);
     for(int i=0; i<101; ++i) {
         x[i] = i;
@@ -142,6 +168,69 @@ void MainWindow::on_tanPlotBtn_clicked()
     ui->trigPlot->graph(0)->rescaleAxes();
     ui->trigPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     ui->trigPlot->replot();
+}
+
+
+
+void MainWindow::on_actionO_programie_triggered()
+{
+    QMessageBox::information(this, "O programie","Wykonał: Mirosław Wierzbicki 262121");
+}
+
+
+void MainWindow::on_actionZamknij_triggered()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_clrFxPlotBtn_clicked()
+{
+    if((ui->plot->graph(0))!=0) { //graph() zwraca 0 jezeli nie ma o zadanym indeksie, walidacja bledow
+        ui->plot->graph(0)->data()->clear();
+        ui->plot->replot();
+    }
+}
+
+//logika dla spin boxow dla sin cos tan i arc
+void MainWindow::on_sinSpinBox_valueChanged(double arg1) //argument potrzebny ale nie uzywany
+{
+    double value = qSin(ui->sinSpinBox->value());
+    ui->sinValue->setValue(value);
+}
+
+
+void MainWindow::on_cosSpinBox_valueChanged(double arg1)
+{
+    double value = qCos(ui->cosSpinBox->value());
+    ui->cosValue->setValue(value);
+}
+
+
+void MainWindow::on_tanSpinBox_valueChanged(double arg1)
+{
+    double value = qTan(ui->tanSpinBox->value());
+    ui->tanValue->setValue(value);
+}
+
+void MainWindow::on_arcsinSpinBox_valueChanged(double arg1)
+{
+    double value = qAsin(ui->arcsinSpinBox->value());
+    ui->arcsinValue->setValue(value);
+}
+
+
+void MainWindow::on_arccosSpinBox_valueChanged(double arg1)
+{
+    double value = qAcos(ui->arccosSpinBox->value());
+    ui->arccosValue->setValue(value);
+}
+
+
+void MainWindow::on_arctanSpinBox_valueChanged(double arg1)
+{
+    double value = qAtan(ui->arctanSpinBox->value());
+    ui->arctanValue->setValue(value);
 }
 
 

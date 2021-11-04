@@ -34,6 +34,24 @@ private slots:
 
 
 
+    void on_actionO_programie_triggered();
+
+    void on_actionZamknij_triggered();
+
+    void on_clrFxPlotBtn_clicked();
+
+    void on_sinSpinBox_valueChanged(double arg1);
+
+    void on_cosSpinBox_valueChanged(double arg1);
+
+    void on_tanSpinBox_valueChanged(double arg1);
+
+    void on_arccosSpinBox_valueChanged(double arg1);
+
+    void on_arctanSpinBox_valueChanged(double arg1);
+
+    void on_arcsinSpinBox_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
 };
