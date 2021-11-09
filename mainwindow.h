@@ -54,6 +54,15 @@ private slots:
 
     void on_circleSpinBox_valueChanged(double arg1);
 
+    void on_pushButton_clicked();
+
+
+    void on_squareCheckbox_stateChanged(int arg1);
+
+    void on_pushButton_2_clicked();
+
+    void on_aRectangleSpinBox_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
 };

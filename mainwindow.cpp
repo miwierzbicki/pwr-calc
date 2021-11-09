@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->statusbar->showMessage("v 0.22");
+    ui->statusbar->showMessage("dev compilation from 09-11-2021");
 }
 
 MainWindow::~MainWindow()
@@ -61,7 +61,7 @@ void MainWindow::on_calculateVectorBtn_clicked()
     double Yb = ui->spinBoxYb->value();
     double vectorLength = qSqrt(qPow(Xb-Xa, 2)+qPow(Yb-Ya, 2)); //z libki qtmath
     QString labelVectorLength = QString::number(vectorLength, 'f', 3);
-    ui->labelVectorLength->setText(labelVectorLength);
+    ui->labelVectorLength->setText("|AB| = "+labelVectorLength);
 }
 
 
@@ -238,12 +238,60 @@ void MainWindow::on_circleSpinBox_valueChanged(double arg1)
     if(ui->doublePiCheckbox->isChecked()) {
         double value = ui->circleSpinBox->value()*ui->circleSpinBox->value()*3.14159265359;
         QString qvalue = QString::number(value, 'f', 7);
-        ui->circleValue->setText(qvalue);
+        ui->circleValue->setText("Pole = "+qvalue);
     }
     else {
         double value = ui->circleSpinBox->value()*ui->circleSpinBox->value()*3.14;
         QString qvalue = QString::number(value, 'f', 3);
-        ui->circleValue->setText(qvalue);
+        ui->circleValue->setText("Pole = "+qvalue);
+    }
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    double a = ui->aTriangleSpinBox->value();
+    double b = ui->bTriangleSpinBox->value();
+    double c = ui->cTriangleSpinBox->value();
+    double p = (a + b + c) / 2; //wzor Herona
+    double s = qSqrt(p * (p-a) * (p-b) * (p-c)); //same
+    QString value = QString::number(s, 'f', 7);
+    if ((a+b>c) && (a+c>b) && (b+c>a)) {
+        ui->triangleValue->setText("Pole =  "+value);
+    }
+    else {
+        ui->triangleValue->setText("Nie można stworzyć takiego trójkąta!");
+    }
+}
+
+
+void MainWindow::on_squareCheckbox_stateChanged(int arg1)
+{
+    double aVal = ui->aRectangleSpinBox->value();
+    if(ui->bRectangleSpinBox->isEnabled()) {
+        ui->bRectangleSpinBox->setDisabled(true);
+        ui->bRectangleSpinBox->setValue(aVal);
+    }
+
+    else
+        ui->bRectangleSpinBox->setDisabled(false);
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    double a = ui->aRectangleSpinBox->value();
+    double b = ui->bRectangleSpinBox->value();
+    double p = a*b;
+    QString value = QString::number(p, 'f', 7);
+    ui->rectangleValue->setText("Pole = "+value);
+}
+
+
+void MainWindow::on_aRectangleSpinBox_valueChanged(double arg1)
+{
+    if(!ui->bRectangleSpinBox->isEnabled()) {
+        ui->bRectangleSpinBox->setValue(ui->aRectangleSpinBox->value());
     }
 }
 
