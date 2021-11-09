@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>746</width>
-    <height>557</height>
+    <width>733</width>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tabFunction">
        <attribute name="title">
@@ -1001,7 +1001,7 @@
         <item row="1" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
-           <widget class="QDoubleSpinBox" name="doubleSpinBox">
+           <widget class="QDoubleSpinBox" name="degSpinBox">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1051,7 +1051,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+           <widget class="QDoubleSpinBox" name="radSpinBox">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1220,6 +1220,12 @@
            </item>
            <item row="4" column="0">
             <widget class="QPushButton" name="pushButton_2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
              <property name="text">
               <string>Oblicz</string>
              </property>
@@ -1309,6 +1315,12 @@
            </item>
            <item row="4" column="0">
             <widget class="QPushButton" name="pushButton">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
              <property name="text">
               <string>Oblicz</string>
              </property>
@@ -1328,7 +1340,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>746</width>
+     <width>733</width>
      <height>20</height>
     </rect>
    </property>

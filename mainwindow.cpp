@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->statusbar->showMessage("dev compilation from 09-11-2021");
+    ui->statusbar->showMessage("Final version");
 }
 
 MainWindow::~MainWindow()
@@ -293,5 +293,18 @@ void MainWindow::on_aRectangleSpinBox_valueChanged(double arg1)
     if(!ui->bRectangleSpinBox->isEnabled()) {
         ui->bRectangleSpinBox->setValue(ui->aRectangleSpinBox->value());
     }
+}
+
+
+
+void MainWindow::on_degSpinBox_valueChanged(double arg1)
+{
+    ui->radSpinBox->setValue(qDegreesToRadians(ui->degSpinBox->value()));
+}
+
+
+void MainWindow::on_radSpinBox_valueChanged(double arg1)
+{
+    ui->degSpinBox->setValue(qRadiansToDegrees(ui->radSpinBox->value()));
 }
 

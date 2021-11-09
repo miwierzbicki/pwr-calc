@@ -63,6 +63,10 @@ private slots:
 
     void on_aRectangleSpinBox_valueChanged(double arg1);
 
+    void on_degSpinBox_valueChanged(double arg1);
+
+    void on_radSpinBox_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
 };
