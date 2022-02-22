@@ -1,7 +1,14 @@
 # pwr-calc
-- wpisywanie wzoru funkcji kwadratowej/liniowej, obliczanie na tej podstawie miejsc zerowych, wspolczynników,
-- Wyznaczanie długosci wektorów,
-- Trygonometria: cos, sin, tg, ctg, arccos, arcsin, zamiana rad<=>deg, 
-- Rysowanie wykresów funkcji i zapis jako jpg,
-- Obliczanie pól figur geometrycznych
-- Docelowo funkcjonalności w kilku zakładkach
+The project was created for the programming course at the Wrocław University of Technology.
+
+Features:
+- Calculating the zero places of a function and drawing the graph based on the parameters given by the user
+- Save chart to file
+- Determining the lengths of vectors
+- Basic calculations of trigonometric functions
+- Radians to Degrees conversion
+- Calculating areas of figures
+
+## Technologies used:
+- Qt
+- [QCustomPlot library for plotting](https://www.qcustomplot.com/)
